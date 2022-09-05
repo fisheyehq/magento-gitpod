@@ -5,8 +5,8 @@ url=$(gp url | awk -F"//" {'print $2'}) && url+="/" &&
 url="https://8002-"$url && 
 if [ "${INSTALL_MAGENTO}" = "YES" ]; then php bin/magento setup:install --db-name='magento2' --db-user='root' --db-password='nem4540' --base-url=$url --backend-frontname='admin' --admin-user='admin' --admin-password='adm4540' --admin-email=$GITPOD_GIT_USER_EMAIL --admin-firstname='Admin' --admin-lastname='User' --use-rewrites='1' --use-secure='1' --base-url-secure=$url --use-secure-admin='1' --language='en_GB' --db-host='127.0.0.1' --cleanup-database --timezone='Europe/London' --currency='GBP' --session-save='redis'; fi &&
 
-sed -i.bak "s,'AUTH_USER',${MAGENTO_COMPOSER_AUTH_USER},g" ${GITPOD_REPO_ROOT}/auth.json &&
-sed -i.bak "s,'AUTH_PASS',${MAGENTO_COMPOSER_AUTH_PASS},g" ${GITPOD_REPO_ROOT}/auth.json &&
+sed -i "s/AUTH_USER/${MAGENTO_COMPOSER_AUTH_USER}/g" ${GITPOD_REPO_ROOT}/auth.json &&
+sed -i "s/AUTH_PASS/${MAGENTO_COMPOSER_AUTH_PASS}/g" ${GITPOD_REPO_ROOT}/auth.json &&
 n98-magerun2 sampledata:deploy &&
 n98-magerun2 module:disable Magento_Csp &&
 n98-magerun2 module:disable Magento_TwoFactorAuth &&
