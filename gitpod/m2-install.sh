@@ -8,8 +8,8 @@ if [ "${INSTALL_MAGENTO}" = "YES" ]; then php bin/magento setup:install --db-nam
 sed -i "s/AUTH_USER/${MAGENTO_COMPOSER_AUTH_USER}/g" ${GITPOD_REPO_ROOT}/auth.json &&
 sed -i "s/AUTH_PASS/${MAGENTO_COMPOSER_AUTH_PASS}/g" ${GITPOD_REPO_ROOT}/auth.json &&
 n98-magerun2 sampledata:deploy &&
-n98-magerun2 module:disable Magento_Csp &&
-n98-magerun2 module:disable Magento_TwoFactorAuth &&
+n98-magerun2 module:enable --all &&
+n98-magerun2 module:disable Magento_Csp Magento_TwoFactorAuth &&
 n98-magerun2 setup:upgrade &&
 
 yes | php bin/magento setup:config:set --session-save=redis --session-save-redis-host=127.0.0.1 --session-save-redis-log-level=3 --session-save-redis-db=0 --session-save-redis-port=6379;
