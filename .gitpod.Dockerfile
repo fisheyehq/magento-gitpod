@@ -2,10 +2,14 @@ FROM gitpod/workspace-full:latest
 
 # Magento Config
 ENV INSTALL_MAGENTO YES
-ENV MAGENTO_VERSION 2.4.4
-ENV MAGENTO_ADMIN_EMAIL admin@magento.com
-ENV MAGENTO_ADMIN_PASSWORD password1
+ENV MAGENTO_EDITION enterprise # community = Open Source, enterprise = Adobe Commerce
+ENV MAGENTO_VERSION 2.4.5
+ENV INSTALL_SAMPLE_DATA YES
 ENV MAGENTO_ADMIN_USERNAME admin
+ENV MAGENTO_ADMIN_PASSWORD password1
+
+# Composer Credentials for repo.magento.com
+# For Commerce override these in your Gitpod user variables - https://gitpod.io/variables
 ENV MAGENTO_COMPOSER_AUTH_USER 64229a8ef905329a184da4f174597d25
 ENV MAGENTO_COMPOSER_AUTH_PASS a0df0bec06011c7f1e8ea8833ca7661e
 
@@ -16,7 +20,7 @@ ENV ELASTICSEARCH_VERSION 7.9.3
 ENV COMPOSER_VERSION 2.3.5
 ENV NODE_VERSION 14.17.3
 ENV MYSQL_ROOT_PASSWORD nem4540
-ENV XDEBUG_DEFAULT_ENABLED YES
+ENV XDEBUG_DEFAULT_ENABLED NO
 
 # add node and npm to path so the commands are available
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
