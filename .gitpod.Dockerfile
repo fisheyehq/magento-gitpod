@@ -1,8 +1,10 @@
 FROM gitpod/workspace-full:latest
 
 # Magento Config
+# For Open Source, set MAGENTO_EDITION to community
+# For Adobe Commerce, set MAGENTO_EDITION to enterprise
 ENV INSTALL_MAGENTO YES
-ENV MAGENTO_EDITION enterprise # community = Open Source, enterprise = Adobe Commerce
+ENV MAGENTO_EDITION enterprise
 ENV MAGENTO_VERSION 2.4.5
 ENV INSTALL_SAMPLE_DATA YES
 ENV MAGENTO_ADMIN_USERNAME admin
