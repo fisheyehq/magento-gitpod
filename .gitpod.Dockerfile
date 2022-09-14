@@ -11,9 +11,13 @@ ENV MAGENTO_ADMIN_USERNAME admin
 ENV MAGENTO_ADMIN_PASSWORD password1
 
 # Composer Credentials for repo.magento.com
-# For Commerce override these in your Gitpod user variables - https://gitpod.io/variables
+# For Adobe Commerce override these in your Gitpod user variables - https://gitpod.io/variables
 ENV MAGENTO_COMPOSER_AUTH_USER 64229a8ef905329a184da4f174597d25
 ENV MAGENTO_COMPOSER_AUTH_PASS a0df0bec06011c7f1e8ea8833ca7661e
+
+# Hyvä Themes Config
+# Note: you must also add your composer credentials to HYVA_COMPOSER_TOKEN and HYVA_COMPOSER_PROJECT in your Gitpod user variables - https://gitpod.io/variables
+ENV INSTALL_HYVA NO
 
 # Platform Config
 ENV PHP_VERSION 8.1
