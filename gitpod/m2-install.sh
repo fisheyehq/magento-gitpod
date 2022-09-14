@@ -11,6 +11,13 @@ sed -i "s/AUTH_PASS/${MAGENTO_COMPOSER_AUTH_PASS}/g" ${GITPOD_REPO_ROOT}/auth.js
 
 if [ "${MAGENTO_EDITION}" = "enterprise" ]; then composer require magento/extension-b2b; fi &&
 if [ "${INSTALL_SAMPLE_DATA}" = "YES" ]; then n98-magerun2 sampledata:deploy; fi &&
+
+if [ "${INSTALL_HYVA}" = "YES" ] && [ ! -z "${HYVA_COMPOSER_TOKEN}" ] && [ ! -z "${HYVA_COMPOSER_PROJECT}" ]; then
+	composer config --auth http-basic.hyva-themes.repo.packagist.com token ${HYVA_COMPOSER_TOKEN}
+	composer config repositories.private-packagist composer https://hyva-themes.repo.packagist.com/${HYVA_COMPOSER_PROJECT}/
+	composer require hyva-themes/magento2-default-theme
+fi &&
+
 n98-magerun2 module:enable --all &&
 n98-magerun2 module:disable Magento_Csp Magento_TwoFactorAuth &&
 n98-magerun2 setup:upgrade &&
@@ -38,6 +45,16 @@ if [ "${MAGENTO_EDITION}" = "enterprise" ]; then
 	n98-magerun2 config:store:set sales/product_sku/my_account_enable "1"
 fi &&
 
+if [ "${INSTALL_HYVA}" = "YES" ] && [ ! -z "${HYVA_COMPOSER_TOKEN}" ] && [ ! -z "${HYVA_COMPOSER_PROJECT}" ]; then
+	# TODO: find a more reliable way to check hyva/default theme ID
+	if n98-magerun2 dev:theme:list | grep -q "spectrum"; then
+	    n98-magerun2 config:store:set design/theme/theme_id 6
+	else
+	    n98-magerun2 config:store:set design/theme/theme_id 5
+	fi
+
+	n98-magerun2 config:store:set customer/captcha/enable 0
+fi &&
 
 n98-magerun2 cache:flush &&
 redis-cli flushall &&
