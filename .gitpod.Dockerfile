@@ -17,7 +17,7 @@ ENV MAGENTO_COMPOSER_AUTH_PASS a0df0bec06011c7f1e8ea8833ca7661e
 
 # Hyvä Themes Config
 # Note: you must also add your composer credentials to HYVA_COMPOSER_TOKEN and HYVA_COMPOSER_PROJECT in your Gitpod user variables - https://gitpod.io/variables
-ENV INSTALL_HYVA NO
+ENV INSTALL_HYVA YES
 
 # Platform Config
 ENV PHP_VERSION 8.1
